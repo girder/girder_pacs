@@ -203,7 +203,7 @@ def _createThumbnail(item):
 
     outdir = VolumePath('__thumbnails_output__')
     return docker_run.delay(
-        'TODO francois/dicom_thumbnails:latest', container_args=[
+        'girder/dicom_thumbnailer:latest', container_args=[
             '--slices', str(_THUMB_SLICES),
             '--width', str(THUMB_WIDTH),
             '--height', str(THUMB_HEIGHT),
