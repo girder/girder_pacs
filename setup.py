@@ -36,7 +36,7 @@ setup(
     zip_safe=False,
     entry_points={
         'girder.plugin': [
-            'girder_stroke = girder_stroke:GirderPlugin'
+            'girder_stroke = girder_stroke:StrokePlugin'
         ]
     }
 )
