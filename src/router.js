@@ -1,6 +1,6 @@
 import Router from 'vue-router';
 import Vue from 'vue';
-import * as GirderComponents from '@girder/components/src/components';
+import { components } from '@girder/components';
 import StudyList from './components/StudyList.vue';
 
 Vue.use(Router);
@@ -11,6 +11,6 @@ export default new Router({
     component: StudyList,
   }, {
     path: '/auth',
-    component: GirderComponents.Authentication,
+    component: components.Authentication,
   }],
 });
