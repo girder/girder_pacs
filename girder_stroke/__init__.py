@@ -11,6 +11,7 @@ from girder.models.collection import Collection
 from girder.models.file import File
 from girder.models.folder import Folder
 from girder.models.item import Item
+from girder.models.setting import Setting
 from girder.models.user import User
 from girder.plugin import getPlugin, registerPluginWebroot, GirderPlugin
 from girder_jobs.models.job import Job
@@ -97,9 +98,16 @@ class Study(Resource):
     )
     def createStudy(self, patientId, date, modality, description, public):
         user = self.getCurrentUser()
+        collId = Setting().get(PluginSettings.STUDIES_COLL_ID)
+        if collId:
+            parent = Collection().load(collId, exc=True, force=True)
+            parentType='collection'
+        else:
+            parent = user
+            parentType = 'user'
         study = Folder().createFolder(
-            parent=user, name=patientId, description=description, parentType='user', public=public,
-            creator=user, allowRename=True)
+            parent=parent, name=patientId, description=description, parentType=parentType,
+            public=public, creator=user, allowRename=True)
         study['isStudy'] = True
         study['nSeries'] = 0
         study['studyDate'] = date
