@@ -36,7 +36,7 @@ v-app(dark)
           :custom-filter="customFilter", :filter="filter", :rows-per-page-items="rowsPerPageItems",
           rows-per-page-text="Studies per page:")
         template(slot="items", slot-scope="props")
-          tr.study-row(@click="$emit('select', props.item)",
+          tr.study-row(@click="selectStudy(props.item)",
               :active="selectedStudy && selectedStudy._id === props.item._id")
             td {{ props.item.patientId }}
             td

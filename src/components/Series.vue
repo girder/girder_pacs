@@ -14,6 +14,7 @@ v-card.cinema-wrapper(light)
 <script>
 import QueryDataModel from 'paraviewweb/src/IO/Core/QueryDataModel';
 import MouseHandler from 'paraviewweb/src/Interaction/Core/MouseHandler';
+import 'setimmediate'; // sigh...
 
 export default {
   inject: ['girderRest'],
@@ -24,7 +25,7 @@ export default {
     },
   },
   mounted() {
-    const base = `/item/${this.series._id}/interactive_thumbnail/`;
+    const base = `/item/${this.series._id}/dicom_thumbnail/`;
 
     this.girderRest.get(`${base}index.json`).then(({ data }) => {
       const container = this.$el.querySelector('.cinema-img');
@@ -69,10 +70,13 @@ export default {
 .cinema-img {
     width: 256px;
     height: 256px;
-    background-color: #000;
+    background-color: black;
+}
 
-    img {
-        -webkit-user-drag: none;
-    }
+</style>
+
+<style lang="scss">
+.cinema-img img {
+     -webkit-user-drag: none;
 }
 </style>

@@ -212,7 +212,7 @@ def _createThumbnail(item):
     outdir = VolumePath('__thumbnails_output__')
     return docker_run.delay(
         'girder/dicom_thumbnailer:latest', container_args=[
-            '--slices', str(_THUMB_SLICES),
+            '--slices', str(THUMB_SLICES),
             '--width', str(THUMB_WIDTH),
             '--height', str(THUMB_HEIGHT),
             GirderItemIdToVolume(item['_id'], item_name=item['name']),
